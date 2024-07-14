@@ -54,12 +54,16 @@ const Statistics = ({good, bad, neutral, allClicks}) => {
     return (
       <div>
       <h1>Statistics</h1>
-        <StatisticLine text="Good" value={good}/>
-        <StatisticLine text="Neutral" value={neutral}/>
-        <StatisticLine text="Bad" value={bad}/>
-        <StatisticLine text="All" value={countAll(allClicks)} />
-        <StatisticLine text="Average" value={countAverage(allClicks)} />
-        <StatisticLine text="Positive" value={countPositive(allClicks) + " %"} />
+      <table>
+        <tbody>
+          <StatisticLine text="Good" value={good}/>
+          <StatisticLine text="Neutral" value={neutral}/>
+          <StatisticLine text="Bad" value={bad}/>
+          <StatisticLine text="All" value={countAll(allClicks)} />
+          <StatisticLine text="Average" value={countAverage(allClicks)} />
+          <StatisticLine text="Positive" value={countPositive(allClicks) + " %"} />     
+        </tbody>
+      </table>
       </div>
     )
   }
@@ -67,7 +71,10 @@ const Statistics = ({good, bad, neutral, allClicks}) => {
 
 const StatisticLine = ({text, value}) => {
   return (
-    <p>{text}: {value}</p>
+    <tr>
+      <td>{text}:</td>
+      <td>{value}</td>
+    </tr>
   )
 }
 
