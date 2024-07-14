@@ -6,6 +6,16 @@ const Button = (props) => {
   )
 }
 
+const MaxAnecdote = (props) => {
+  return (
+    <div>
+      <h1>Anecdote with most votes</h1>
+      <p>{props.text}</p>
+      <p>Has {props.votes} votes</p>
+    </div>
+  );
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -39,12 +49,28 @@ const App = () => {
     setVotes(copy)
   }
 
+  const getWithMostVotes = () => {
+    let maxVotes = 0;
+    let maxIndex = 0;
+    for (let i = 0; i < votes.length; i++) {
+      if (votes[i] > maxVotes) {
+        maxVotes = votes[i];
+        maxIndex = i;
+      }
+    }
+    return { anecdote: anecdotes[maxIndex], votes: maxVotes };
+  }
+
+  const mostVoted = getWithMostVotes();
+
   return (
     <div>
-      <h1>{anecdotes[selected]}</h1>
-      <h1>Has {votes[selected]} votes</h1>
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}</p>
+      <p>Has {votes[selected]} votes</p>
       <Button handleClick={getRandomQuote} text="Next anecdote" />
       <Button handleClick={addVote} text="Vote" />
+      <MaxAnecdote text={mostVoted.anecdote} votes={mostVoted.votes} />
     </div>
   )
 }
