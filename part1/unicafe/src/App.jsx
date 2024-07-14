@@ -42,17 +42,27 @@ const Statistics = ({good, bad, neutral, allClicks}) => {
   
   const countAll = () => allClicks.length;
 
-  return (
-    <div>
-    <h1>Statistics</h1>
-      <StatElement statText="Good" metric={good}/>
-      <StatElement statText="Neutral" metric={neutral}/>
-      <StatElement statText="Bad" metric={bad}/>
-      <StatElement statText="All" metric={countAll(allClicks)} />
-      <StatElement statText="Average" metric={countAverage(allClicks)} />
-      <StatElement statText="Positive" metric={countPositive(allClicks) + " %"} />
-    </div>
-  )
+  if (allClicks.length === 0) {
+    return (
+      <div>
+        <h1>Statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  } 
+  else {
+    return (
+      <div>
+      <h1>Statistics</h1>
+        <StatElement statText="Good" metric={good}/>
+        <StatElement statText="Neutral" metric={neutral}/>
+        <StatElement statText="Bad" metric={bad}/>
+        <StatElement statText="All" metric={countAll(allClicks)} />
+        <StatElement statText="Average" metric={countAverage(allClicks)} />
+        <StatElement statText="Positive" metric={countPositive(allClicks) + " %"} />
+      </div>
+    )
+  }
 }
 
 const StatElement = ({statText, metric}) => {
